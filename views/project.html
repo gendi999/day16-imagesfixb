@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <title>gendi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  </head>
+  <body class="bg-dark-subtle">
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="public/images/logo.png" id="image" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
+            <li class="nav-item">
+                <a href="/" class="nav-link active" aria-current="page">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="/project" class="nav-link">Add Project</a>
+            </li>
+        </ul>
+        
+        <div class="d-flex justify-content-end">
+          <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
+            {{if .FlashStatus}}
+              <li class="nav-item">
+                  <a class="nav-link" href="/">Hello, {{.FlashName}}</a>
+              </li>
+              <li class="nav-item ms-3">
+                  <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            {{else}}
+              <li class="nav-item">
+                <a class="nav-link" href="/form-register">Register</a>
+              </li>
+              <li class="nav-item ms-3">
+                  <a class="nav-link" href="/form-login">Login</a>
+              </li>
+            {{end}}
+          </ul>
+          <a class="btn btn-danger btn-submit ms-5" href="/contact">Contact Me</a>
+      </div>
+    </div>
+  </div>
+    </nav>
+
+    <!-- Blog -->
+    <!-- Form -->
+    <div class="container fw-bold " style="width: 45vw;">
+      <h3 class="text-center mt-5 ">Creating Blog Post</h3>
+      <form action="/addproject" enctype="multipart/form-data" method="POST">
+          <div class="mb-3">
+              <label for="input-blog-title" class="form-label">Project Name</label>
+              <input name="projectname" type="text" class="form-control" id="input-blog-title" >
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="sdate">Star Date</label>
+              <input name="sdate" type="date" class="form-control" id="sdate" aria-describedby="sdate">
+            </div>
+            <div class="col">
+              <label for="edate">End Date</label>
+              <input name="edate" type="date" class="form-control" id="edate" aria-describedby="edate">
+            </div>
+            </div>
+          <div class="mb-3">
+              <label for="content" class="form-label">Description</label>
+              <textarea name="description" class="form-control" id="content" style="height: 200px; resize: none"></textarea>
+          </div>
+          <div class="mb-3">
+          <label for="input-teknologi">teknologies</label>
+          <div class="row">
+            <div class="col-6 col-sm-3 mb-3">
+              <input name="technologies" type="checkbox" id="nodejs" value="nodejs" style="width: 30px;">
+              <label for="checkbox1">Node.js</label>
+          </div>
+            <div class="col-6 col-sm-3 mb-3">
+              <input name="technologies" type="checkbox" id="reactjs" value="reactjs" style="width: 30px;">
+              <label for="checkbox2">React.js</label>
+            </div>
+            <div class="w-100"></div>
+       
+          <div class="col-6 col-sm-3 mb-3">
+            <input name="technologies" type="checkbox" id="nextjs" value="nextjs" style="width: 30px;">
+            <label for="checkbox3">Next.js</label>
+          </div>
+          <div class="col-6 col-sm-3 mb-3">
+            <input name="technologies" type="checkbox" id="javascript" value="javascript" style="width: 30px;">
+            <label for="checkbox4">javascript</label>
+          </div>
+          </div>
+          </div>
+          
+          <div class="mb-3">
+            <label class="form-label" for="upload">Upload Image</label>
+            <input type="file" name="upload-image" class="form-control w-100" id="upload">
+        </div>
+          <div class="d-flex justify-content-end mt-5">
+            <button type="submit" class="btn btn-dark">Submit</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+
+
+<!-- <div class="card rounded-0">
+  <div class="card-body me-5 ms-5">
+      <h2 class="text-center mb-2">My Project</h2>
+      <div class="row row-cols-2 row-cols-md-3 g-3"> -->
+          <!-- Dynamic Content Start -->
+          <!-- {{ range $index, $data := .Blogs }}
+          <div class="col">
+              <div class="card h-150">
+                  <img src="/public/images/2.jpg" class="card-body">
+                  <div class="card-body">
+                      <h5 class="card-title"><a href="/project/{{ $index }}">{{$data.Projectname}}</a></h5>
+                      <h6>Duration: {{$data.Sdate}}</h6>
+                      <div class="description-text" style="height: 50px; overflow: hidden; max-width: 100%;">
+                          <p class="card-text">{{$data.Description}}</p>
+                      </div>
+                      <div class="tech-icon fs-3">
+                          {{ range $index, $data := $data.Technologies}}
+                          <span class="icon">
+                              <img src="/public/images/{{ $data }}.png" style="width: 50px;">
+                          </span>
+                          {{end}}
+                      </div>
+                      <div class="card-button w-100 d-flex justify-content-between">
+                          <a href="/blogedit/{{$index}}" class="btn btn-dark w-50 m-1">Edit</a>
+                          <a href="/delete-blog/{{$index}}" class="btn btn-dark w-50 m-1">Delete</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {{end}}
+      </div>
+  </div>
+</div>  -->
+<!-- <hr class="line" />
+      <div class="blog-list" id="contents"> -->
+        <!-- dynamic content would be here -->
+        <!-- {{range $index, $data := .Blogs}}
+          <div class="blog-list-item">
+            <div class="blog-image">
+              <img src="/public/images/2.jpg" alt="" />
+            </div>
+            <div class="blog-content">
+              <div class="btn-group">
+                <a href="" class="btn-edit">Edit Post</a>
+                <a href="/delete-blog/{{$index}}" class="btn-post">DELETE</a>
+              </div>
+              <h1>
+                <a href="/blog-detail/{{$index}}" target="_blank"
+                  >{{$data.Title}}</a
+                >
+              </h1>
+              <div class="detail-blog-content">
+                {{$data.Post_date}} | {{$data.Author}}
+              </div>
+              <p>
+                {{$data.Content}}
+              </p>
+              <div class="tech-icon fs-3">
+                {{ range $index, $data := $data.Technologies}}
+                <span class="icon">
+                    <img src="/public/img/{{ $data }}.png" style="width: 50px;">
+                </span>
+                {{end}}
+            </div>
+
+              <div style="float:right; margin: 10px">
+                <p style="font-size: 15px; color:grey">1 minutes ago</p>
+              </div>
+
+            </div>
+          </div>
+        {{end}}
+      </div>
+    </div> -->
+
+
+  
+    <!-- <script src="assets/js/blog.js"></script> -->
+  </body>
+</html>

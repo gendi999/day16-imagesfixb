@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title>gendi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  </head>
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <img src="/public/images/logo.png" id="image" />
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link " aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item ms-3">
+              <a class="nav-link fw-semibold active text-dark" href="/blog">Add Projet</a>
+            </li>
+          </ul>
+
+          <div class="d-flex justify-content-end">
+              <a class="btn btn-dark btn-submit" type="button" href="/contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Blog -->
+    <!-- Form -->
+    <div class="container fw-bold " style="width: 45vw;">
+      <h3 class="text-center mt-5 ">Creating Blog Post</h3>
+      <form action="/updateProject/{{.Projects.ID}}" enctype="multipart/form-data" method="POST" >
+          <div class="mb-3">
+              <label for="input-blog-title" class="form-label">Title</label>
+              <input name="projectname" type="text" class="form-control" id="input-blog-title" value="{{ .Projects.Projectname }}" >
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="sdate">Star Date</label>
+              <input name="sdate" type="date" class="form-control" id="sdate" aria-describedby="sdate" value="{{ .Projects.Sdate.Format "2006-01-02" }}">
+            </div>
+            <div class="col">
+              <label for="input-blog-akhir">End Date</label>
+              <input name="edate" type="date" class="form-control" id="edate" aria-describedby="edate" value="{{ .Projects.Edate.Format "2006-01-02" }}">
+            </div>
+            </div>
+          <div class="mb-3">
+              <label for="description" class="form-label">Content</label>
+              <textarea name="description" class="form-control" id="description" style="height: 100px; resize: none">{{ .Projects.Description }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="input-teknologi">teknologies</label>
+            <div class="row">
+              <div class="col-6 col-sm-3 mb-3">
+              <input name="technologies"{{ range $index, $data := .Projects.Technologies }}{{ if (eq $data "nodejs" ) }} checked {{end}}{{end}} type="checkbox" id="nodejs" value="nodejs" style="width: 30px;">
+              <label for="checkbox1">Node.js</label>
+          </div>
+            <div class="styled-checkbox col-6 col-sm-3 mb-3">
+              <input name="technologies"{{ range $index, $data := .Projects.Technologies }}{{ if (eq $data "reactjs" ) }} checked {{end}}{{end}} type="checkbox" id="reactjs" value="reactjs" style="width: 30px;">
+              <label for="checkbox2">React.js</label>
+            </div>
+       <div class="w-100"></div>
+
+          <div class="styled-checkbox col-6 col-sm-3 mb-3">
+            <input name="technologies"{{ range $index, $data := .Projects.Technologies }}{{ if (eq $data "nextjs" ) }} checked {{end}}{{end}} type="checkbox" id="nextjs" value="nextjs" style="width: 30px;">
+            <label for="checkbox3">Next.js</label>
+            <i class="fa-brands fa-java"></i>
+          </div>
+          <div class="styled-checkbox col-6 col-sm-3 mb-3">
+            <input name="technologies"{{ range $index, $data := .Projects.Technologies }}{{ if (eq $data "javascript" ) }} checked {{end}}{{end}} type="checkbox" id="javascript" value="javascript" style="width: 30px;">
+            <label for="checkbox4">javascript</label>
+            <i class="fa-brands fa-java"></i>
+          </div>
+          </div>
+        </div>
+          
+        <div class="mb-3">
+          <label class="form-label" for="upload">Upload Image</label>
+          <input type="file" name="upload-image" value="{{.Projects.Image}}"class="form-control w-100" id="upload">
+      </div>
+          <div class="d-flex justify-content-end mt-5">
+            <button type="submit" class="btn btn-dark">Submit</button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>
+</body>
+</html>

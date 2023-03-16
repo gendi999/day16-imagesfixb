@@ -1,0 +1,110 @@
+<html>
+
+ <head>
+   <title>Creating Blog Page - detail</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- <link rel="stylesheet" href="/public/css/blog.css" /> -->
+ </head>
+ <body class="bg-secondary">
+   <!-- NavBar -->
+   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+     <div class="container">
+       <a class="navbar-brand" href="/">
+         <img src="/public/images/logo.png" id="image" />
+       </a>
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav me-auto mb-2 ms-5 mb-lg-0">
+           <li class="nav-item">
+               <a href="/" class="nav-link active" aria-current="page">Home</a>
+           </li>
+           <li class="nav-item">
+               <a href="/blog" class="nav-link">Add Project</a>
+           </li>
+       </ul>
+       <a class="btn btn-danger btn-submit ms-5" href="/contact">Contact Me</a>
+   </div>
+ </div>
+ </div>
+   </nav>
+ 
+   <!-- Blog -->
+            
+   <div class="d-flex justify-content-center align-items-center">
+     <div class="card m-5 shadow-sm rounded" style="width: 90%;">
+      <div class="card-body">
+      <div class="d-flex flex-column justify-content-star align-items-star ">
+       <h1 class="align-items-center text-center ">{{.projects.Projectname}}</h1>
+       <div class="row me-2 ms-4">
+         <div class="col-7 mb-3">
+             <div class="thumbnail-wrap">
+                 <img src="/upload/{{.projects.Image}}" class="img-thumbnail border-0 rounded-3" style="width: 670px; height: 400px;" alt="detail">
+             </div>
+            </div>
+            <div class="col-md-4">
+           <div class="mb-3">
+           <div><h4>Author:_{{.projects.Author}}</h4></div>
+               <h3 class="mb-2">Duration</h3>
+               <span class="d-flex align-items-center me-2">
+                   <span class="d-flex flex-row me-3">
+                    <i class="fa-regular fa-calendar-days" style="width: 40px; height: 40px; font-size: 2em;"></i>
+                       <h6 class="m-auto ms-2">{{ .projects.Sdate.Format "2006-01-02"  }} s/d. {{ .projects.Edate.Format "2006-01-02"  }}</h6>
+                   </span>
+               </span>
+               <span class="d-flex me-2 mt-3">
+                   <span class="d-flex flex-row me-3">
+                       <i class="fa-regular fa-clock"  style="width: 40px; height: 40px; font-size: 2em;"></i>
+                       <h6 class="m-auto ms-2">{{ .projects.Duration }}</h6>
+                   </span>
+               </span>
+               <br>
+               <h3 class="mb-3">Technologies</h3>
+              <div class="d-flex align-items-center flex-wrap">
+                  {{ range $index, $data := .projects.Technologies }}
+                  <div class="list-sosmed mb-3">
+                    <div class=" col">
+                      {{ if (eq $data "nodejs")}}
+                      <img src="/public/images/nodejs.png" width="30" style="margin-bottom: 10px; margin-right: 5px;">
+                      <label style="padding-right: 30px; padding-left: none; font-size: 15px;">nodejs</label>
+                      {{end}}
+                    
+                      {{ if (eq $data "reactjs") }}
+                  <img src="/public/images/reactjs.png" width="30" style="margin-bottom: 10px; margin-right: 5px;">
+                  <label style="padding-right: 30px; padding-left: none; font-size: 15px;">React js</label>
+                      {{end}}
+                    </div>
+                    </div>
+                  
+                  <div class="list-sosmed mb-3">
+                    <div class= "col">
+                      {{ if (eq $data "nextjs" )}}
+                      <img src="/public/images/nextjs.png" width="30" style="margin-bottom: 10px; margin-right: 5px;">
+                      <label style="padding-right: 30px; padding-left: none; font-size: 15px;">Next Js</label>
+                      {{end}}
+                      {{ if (eq $data "javascript" )}}
+                      <img src="/public/images/javascript.png" width="30" style="margin-bottom: 10px; margin-right: 5px;">
+                      <label style="padding-right: 30px; padding-left: none; font-size: 15px;">javascript</label>
+                      {{end}}
+                  </div>
+                </div>
+                {{end}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column ms-5 me-5 mt-4" style="text-align: justify;">
+        <p>
+        {{.projects.Description}}
+        </p>
+        </div>
+     </div>
+   </div>
+ </div>
+ </body>
+ 
+ </html>
+ 
